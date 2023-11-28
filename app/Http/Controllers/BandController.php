@@ -32,7 +32,13 @@ class BandController extends Controller
     }
 
     public function deleteBand($id){
+        $band=DB::table('music_bands')->where('id',$id)->first();
+        $photoPath=$band->photo;
         DB::table('music_bands')->where('id',$id)->delete();
+
+        if($photoPath!==null){
+            Storage::delete($photoPath);
+        }
 
         return redirect()->route('allBands')->with('alert','Contacto apagado com successo!');
     }
@@ -85,9 +91,35 @@ class BandController extends Controller
 
     public function deleteAlbum($id){
 
+        $album=DB::table('albums')->where('id',$id)->first();
+        $photoPath=$album->photo;
         DB::table('albums')->where('id',$id)->delete();
-
+        if($photoPath!==null){
+            Storage::delete($photoPath);
+        }
         return redirect()->back()->with('alert','Contacto apagado com successo!');
+    }
+
+    public function updateAlbum(Request $request){
+        $request -> validate([
+            'title'=> 'required|string|max:50',
+            'year'=> 'required|numeric',
+            'photo' => 'image',
+        ]);
+
+        $albumData=[
+            'title'=>$request->input('title'),
+            'year'=>$request->input('year'),
+        ];
+
+        if ($request->hasFile('photo')) {
+            $albumData['photo'] = Storage::putFile('bandPhotos', $request->photo);
+        }
+
+        DB::table('albums')->where('id',$request->id)
+        ->update($albumData);
+
+        return redirect()->back()->with('message','Album atualizado com successo!');
     }
 
     protected function getAllBands(){
@@ -106,4 +138,5 @@ class BandController extends Controller
         return $bandsWithCounts;
     }
 }
+
 

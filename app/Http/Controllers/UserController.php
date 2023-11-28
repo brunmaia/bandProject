@@ -62,7 +62,13 @@ class UserController extends Controller
 
 
     public function deleteUser($id){
-        User::where('id',$id)->delete();
+        $user=User::findOrFail($id);
+        $photoPath=$user->photo;
+        $user->delete();
+        if($photoPath!==null){
+            Storage::delete($photoPath);
+        }
+        // User::where('id',$id)->delete();
 
         return redirect()->route('allUsers')->with('alert','Contacto apagado com successo!');
     }
