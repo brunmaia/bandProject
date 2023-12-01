@@ -9,10 +9,14 @@
 
 
 <div class="container">
+    <section style="text-align: center">
+        <img style="width: 250px" src="{{asset('storage/'.$album->photo)}}" alt="">
+        <h2>{{$album->title}}</h2>
+        <h3>Year:{{$album->year}}</h3>
+        <p>{{$album->description}}</p>
 
-    <h2>{{$album->title}}</h2>
-    <h3>Year:{{$album->year}}</h3>
-    <img style="width: 250px" src="{{asset('storage/'.$album->photo)}}" alt="">
+
+    </section>
     @auth
     <h3>Edit:</h3>
     <form method="POST" action="{{route('updateAlbum')}}" enctype="multipart/form-data">
@@ -57,6 +61,28 @@
 
             @enderror
         </div>
+        <div class="mb-3">
+
+            <label for="description" class="form-label">Description:</label><br>
+            <textarea name="description" class="form-control" type="text" id="dynamic-textarea" value="{{$album->description}}" oninput="autoAdjustHeight(this)"></textarea><br>
+
+
+
+
+            {{-- <label for="exampleInputDescription1" class="form-label">Description</label>
+            <input name="description" type="text" value="{{$album->description}}" class="form-control" id="exampleInputDescription1" aria-describedby="descriptionHelp"> --}}
+
+            @error('description')
+            <div class="--bs-danger-text-emphasis">
+
+                Erro de descrição!
+            </div>
+            @enderror
+            <div id="descriptionHelp" class="form-text">Insert album description here.</div>
+        </div>
+
+
+
 
 
 
@@ -66,4 +92,7 @@
 
     @endauth
 </div>
+
+
+
 @endsection

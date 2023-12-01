@@ -19,6 +19,7 @@ class BandController extends Controller
         $request->validate([
             'name'=>'required|string|max:50',
             'photo'=>'required|image',
+            'description'=>'string',
         ]);
         if($request->hasFile('photo')){
             $photo=Storage::putFile('bandPhotos',$request->photo);
@@ -27,6 +28,7 @@ class BandController extends Controller
         DB::table('music_bands')->insert([
             'name'=>$request->name,
             'photo'=>$photo,
+            'description'=>$request->description,
         ]);
         return redirect()->route('allBands')->with('message','Banda adicionada com successo!');
     }
@@ -34,13 +36,14 @@ class BandController extends Controller
     public function deleteBand($id){
         $band=DB::table('music_bands')->where('id',$id)->first();
         $photoPath=$band->photo;
+
         DB::table('music_bands')->where('id',$id)->delete();
 
         if($photoPath!==null){
             Storage::delete($photoPath);
         }
 
-        return redirect()->route('allBands')->with('alert','Contacto apagado com successo!');
+        return redirect()->route('allBands')->with('alert','Banda apagado com successo!');
     }
 
     public function allBands(){
@@ -75,6 +78,8 @@ class BandController extends Controller
             'photo'=>'required|image',
             'music_band_id'=>'required',
             'year'=>'required|numeric',
+            'description'=>'string',
+
         ]);
         if($request->hasFile('photo')){
             $photo=Storage::putFile('bandPhotos',$request->photo);
@@ -84,7 +89,9 @@ class BandController extends Controller
             'title'=>$request->title,
             'photo'=>$photo,
             'music_band_id'=>$request->music_band_id,
-            'year'=>$request->year
+            'year'=>$request->year,
+            'description'=>$request->description,
+
         ]);
         return redirect()->route('viewBand',$request->music_band_id)->with('message','Album adicionado com successo!');
     }

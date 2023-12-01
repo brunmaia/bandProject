@@ -47,6 +47,27 @@
 
                 @enderror
             </div>
+            <div class="mb-3">
+
+                <label for="description" class="form-label">Description:</label><br>
+                <textarea name="description" class="form-control" type="text" id="dynamic-textarea" value="" oninput="autoAdjustHeight(this)"></textarea><br>
+
+
+
+
+                {{-- <label for="exampleInputDescription1" class="form-label">Description</label>
+            <input name="description" type="text" value="" class="form-control" id="exampleInputDescription1" aria-describedby="descriptionHelp"> --}}
+
+                @error('description')
+                <div class="--bs-danger-text-emphasis">
+
+                    Erro de descrição!
+                </div>
+                @enderror
+                <div id="descriptionHelp" class="form-text">Insert album description here.</div>
+            </div>
+
+
 
 
 

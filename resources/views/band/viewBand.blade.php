@@ -4,10 +4,12 @@
 
 <div class="container">
 
-    <section>
+    <section style="text-align:center">
         <img style="width:300px" src="{{$band->photo ? asset('storage/'.$band->photo):asset('storage/images/noPhoto.png')}}">
 
-        <H2>Name:{{$band->name}}</H2>
+        <H2>{{$band->name}}</H2>
+        <p>{{$band->description}}</p>
+
     </section>
 
     <table class="table table-striped">

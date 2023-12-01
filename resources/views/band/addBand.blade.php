@@ -29,6 +29,26 @@
 
                 @enderror
             </div>
+            <div class="mb-3">
+
+                <label for="description" class="form-label">Description:</label><br>
+                <textarea class="form-control" id="dynamic-textarea" name="description" oninput="autoAdjustHeight(this)"></textarea><br>
+
+
+                {{-- <label for="exampleInputDescription1" class="form-label">Description</label>
+                <input style="width: 200px; padding: 8px; overflow: auto; word-wrap: break-word;" name="description" type="text" value="" class="form-control" id="exampleInputDescription1" aria-describedby="descriptionHelp">
+ --}}
+
+
+                @error('description')
+                <div class="--bs-danger-text-emphasis">
+
+                    Erro de descrição!
+                </div>
+                @enderror
+                <div id="descriptionHelp" class="form-text">Insert band description here.</div>
+            </div>
+
 
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -36,6 +56,9 @@
 
     </div>
 </div>
-<p></p>
+<br>
 <div class="container"><a href="{{route('home')}}">Voltar</a></div>
+
+
+
 @endsection

@@ -1,13 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Dynamic Height Textarea</title>
+    <style>
+        /* Apply some basic styles for the textarea */
+        #dynamic-textarea {
+            padding: 8px;
+            resize: vertical;
+            /* Allow vertical resizing */
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Login dos admins para gerir os albuns e bandas</h1>
-    <h2>tem que ter "ola, esteves"</h2>
+
+    <textarea id="dynamic-textarea" oninput="autoAdjustHeight(this)"></textarea>
+
+    <script>
+        // JavaScript function to adjust the height of the textarea dynamically
+        function autoAdjustHeight(textarea) {
+            textarea.style.height = 'auto'; // Reset the height to auto
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to fit the content
+        }
+
+    </script>
+
 </body>
 </html>
