@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Band;
+use App\Models\Album;
+use App\Models\MusicBand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -34,14 +36,8 @@ class BandController extends Controller
     }
 
     public function deleteBand($id){
-        $band=DB::table('music_bands')->where('id',$id)->first();
-        $photoPath=$band->photo;
-
-        DB::table('music_bands')->where('id',$id)->delete();
-
-        if($photoPath!==null){
-            Storage::delete($photoPath);
-        }
+        $band = MusicBand::find($id);
+        $band->delete();
 
         return redirect()->route('allBands')->with('alert','Banda apagado com successo!');
     }
@@ -98,13 +94,9 @@ class BandController extends Controller
 
     public function deleteAlbum($id){
 
-        $album=DB::table('albums')->where('id',$id)->first();
-        $photoPath=$album->photo;
-        DB::table('albums')->where('id',$id)->delete();
-        if($photoPath!==null){
-            Storage::delete($photoPath);
-        }
-        return redirect()->back()->with('alert','Contacto apagado com successo!');
+        $album = Album::find($id);
+        $album->delete();
+        return redirect()->back()->with('alert','Album apagado com successo!');
     }
 
     public function updateAlbum(Request $request){

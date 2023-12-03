@@ -32,7 +32,7 @@
             <div class="mb-3">
 
                 <label for="description" class="form-label">Description:</label><br>
-                <textarea class="form-control" id="dynamic-textarea" name="description" oninput="autoAdjustHeight(this)"></textarea><br>
+                <textarea class="form-control" id="dynamic-textarea" name="description" oninput="autoAdjustHeight(this)"></textarea>
 
 
                 {{-- <label for="exampleInputDescription1" class="form-label">Description</label>

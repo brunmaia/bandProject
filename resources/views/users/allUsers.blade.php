@@ -34,7 +34,7 @@
             @foreach ($users as $item)
             <tr>
                 <th scope="row">{{$item->id}}</th>
-                <td></td>
+                <td><img width="30px" height="30px" src="{{$item->photo ? asset('storage/'.$item->photo):asset('storage/images/noPhoto.png')}}"></td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->phone}}</td>
                 <td>{{$item->email}}</td>

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MusicBand extends Model
 {
@@ -20,12 +21,15 @@ class MusicBand extends Model
     {
         parent::boot();
 
-        static::deleting(function ($musicBand) {
+        static::deleting(function ($band) {
             // Delete band photo when music band is deleted
-            if ($musicBand->band_photo_path) {
-                // Use PHP's unlink to delete the file
-                unlink(public_path($musicBand->band_photo_path));
-            }
+            Storage::delete($band->photo);
+
+            $band->albums->each(function($album){
+                Storage::delete($album->photo);
+            });
+
+
         });
     }
 }
