@@ -52,6 +52,9 @@ class UserController extends Controller
         ];
 
         if ($request->hasFile('photo')) {
+            if(Storage::exists($request->oldphoto)){
+                Storage::delete($request->oldphoto);
+            }
             $userData['photo'] = Storage::putFile('userPhotos', $request->photo);
         }
 

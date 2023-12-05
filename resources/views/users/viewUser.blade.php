@@ -10,6 +10,11 @@
             <input name="id" type="number" value='{{$user->id}}' class="form-control" id="exampleInputName1" aria-describedby="nameHelp">
 
         </div>
+        <div hidden class="mb-3">
+
+            <input name="oldphoto" type="text" value='{{$user->photo}}'>
+
+        </div>
         <div class="container">
             <img name="profilePhoto" style="width:100px" src="{{asset('storage/'.$user->photo)}}" alt="Profile photo">
 

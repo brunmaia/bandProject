@@ -112,8 +112,12 @@ class BandController extends Controller
         ];
 
         if ($request->hasFile('photo')) {
+            if(Storage::exists($request->oldphoto)){
+                Storage::delete($request->oldphoto);
+            }
             $albumData['photo'] = Storage::putFile('bandPhotos', $request->photo);
         }
+
 
         DB::table('albums')->where('id',$request->id)
         ->update($albumData);
