@@ -38,7 +38,12 @@
                 <td>{{$item->name}}</td>
                 <td>{{$item->phone}}</td>
                 <td>{{$item->email}}</td>
-                <td>{{$item->user_type}}</td>
+                <td>@if($item->user_type == \App\Models\User::ADMIN)
+                    Admin
+                    @else
+                    General
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('viewUser',$item ->id) }}">
                         <button class="btn btn-warning">

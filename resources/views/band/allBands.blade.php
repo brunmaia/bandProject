@@ -3,7 +3,8 @@
 @section('content')
 </div>
 @auth
-@if (Auth::user()->user_type==1)
+@if (Auth::user()->user_type==\App\Models\User::ADMIN)
+
 <div class="container">
 
     <a href="{{route('addBand')}}">Adicionar nova banda</a>
@@ -45,12 +46,13 @@
                     <td>
                         <a href="{{ route('viewBand',$item ->id) }}">
                             <button class="btn btn-warning">
-                                View/Edit
+                                View Band
                             </button>
                         </a>
                     </td>
                     @auth
-                    @if (Auth::user()->user_type==1)
+                    @if (Auth::user()->user_type==\App\Models\User::ADMIN)
+
                     <td>
                         <a href="{{ route('deleteBand',$item ->id) }}">
                             <button class="btn btn-danger">Delete</button>

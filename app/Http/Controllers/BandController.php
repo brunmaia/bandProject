@@ -99,17 +99,48 @@ class BandController extends Controller
         return redirect()->back()->with('alert','Album apagado com successo!');
     }
 
+    public function updateBand(Request $request){
+        $request -> validate([
+            'name'=> 'required|string|max:50',
+            'photo' => 'image',
+            'description'=>'nullable|string',
+        ]);
+
+        $bandData=[
+            'name'=>$request->input('name'),
+        ];
+        if($request->description == !null){
+            $bandData['description']=$request->input('description');
+        }
+
+        if ($request->hasFile('photo')) {
+            if(Storage::exists($request->oldphoto)){
+                Storage::delete($request->oldphoto);
+            }
+            $bandData['photo'] = Storage::putFile('bandPhotos', $request->photo);
+        }
+
+
+        DB::table('music_bands')->where('id',$request->id)
+        ->update($bandData);
+
+        return redirect()->back()->with('message','Banda atualizada com successo!');
+    }
     public function updateAlbum(Request $request){
         $request -> validate([
             'title'=> 'required|string|max:50',
             'year'=> 'required|numeric',
             'photo' => 'image',
+            'description'=>'nullable|string',
         ]);
 
         $albumData=[
             'title'=>$request->input('title'),
             'year'=>$request->input('year'),
         ];
+        if($request->description == !null){
+            $bandData['description']=$request->input('description');
+        }
 
         if ($request->hasFile('photo')) {
             if(Storage::exists($request->oldphoto)){

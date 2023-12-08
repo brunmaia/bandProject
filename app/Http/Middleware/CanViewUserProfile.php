@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +19,7 @@ class CanViewUserProfile
         $requestedUserId = $request->route('id');
         $loggedInUser = $request->user();
 
-        if ($loggedInUser->user_type !== 1 && $loggedInUser->id != $requestedUserId) {
+        if ($loggedInUser->user_type !== User::ADMIN && $loggedInUser->id != $requestedUserId) {
             abort(403, 'Unauthorized.'); // Or redirect or handle unauthorized access
         }
         return $next($request);

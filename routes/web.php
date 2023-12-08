@@ -47,3 +47,4 @@ Route::get('/bands', [BandController::class, 'allBands'])->name('allBands');
 Route::get('/view-band/{id}', [BandController::class, 'viewBand'])->name('viewBand');
 Route::get('/view-album/{id}', [BandController::class, 'viewAlbum'])->name('viewAlbum');
 Route::post('/update-album', [BandController::class, 'updateAlbum'])->name('updateAlbum');
+Route::post('/update-band', [BandController::class, 'updateBand'])->name('updateBand');

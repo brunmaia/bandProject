@@ -27,7 +27,7 @@
                         <a class="nav-link" href="{{route('viewUser',Auth::user()->id)}}">User profile</a>
                     </li>
 
-                    @if(Auth::user()->user_type==1)
+                    @if(Auth::user()->user_type==\App\Models\User::ADMIN)
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('addBand')}}">Add Band</a>
                     </li>

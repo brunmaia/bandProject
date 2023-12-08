@@ -7,7 +7,8 @@
 <div class="container">
 
     @auth
-    @if (Auth::user()->user_type==1)
+    @if (Auth::user()->user_type==\App\Models\User::ADMIN)
+
     <ul>
         <a href="{{route('allUsers')}}">
             <li>Todos os utilizadores</li>
