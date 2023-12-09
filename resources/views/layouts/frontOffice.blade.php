@@ -47,21 +47,33 @@
                 </ul>
             </div>
             @if (Route::has('login'))
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                @auth
-                <a href="{{ url('/home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-                <p>Olá {{Auth::user()->name}}</p>
-                <form action="{{route('logout')}}" method="post">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
+            @auth
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">Hi there, {{Auth::user()->name}}</div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                <div class="container">
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button class="btn btn-primary" type="submit">Logout</button>
+
+                    </form>
+
+                </div>
 
                 @else
-                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                    in</a>
+                <a href="{{ route('login') }}" class="">
+                    <button class="btn btn-primary me-md-2" type="button">
+                        Login
+                    </button>
+                </a>
 
                 @if (Route::has('register'))
-                <a href="{{ route('addUser') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                <a href="{{ route('addUser') }}" class="">
+                    <button class="btn btn-primary" type="button">
+                        Register
+                    </button>
+                </a>
                 @endif
                 @endauth
             </div>

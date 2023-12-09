@@ -9,7 +9,7 @@
             <input name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
 
-        <button type="submit" class="btn btn-primary">Recuperar</button>
+        <button type="submit" class="btn btn-primary">Recover</button>
     </form>
 </div>
 

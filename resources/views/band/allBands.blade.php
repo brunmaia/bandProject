@@ -3,18 +3,12 @@
 @section('content')
 </div>
 @auth
-@if (Auth::user()->user_type==\App\Models\User::ADMIN)
+
 
 <div class="container">
 
-    <a href="{{route('addBand')}}">Adicionar nova banda</a>
-    @endif
+
     @endauth
-
-
-    <h1>
-        Aqui ves todas as Bandas
-    </h1>
     @if (session('message'))
     <div class="alert alert-success">
         {{session('message')}}
@@ -27,8 +21,20 @@
     @endif
 
     <div class="container">
+        @if (Auth::user()->user_type==\App\Models\User::ADMIN)
+        <a href="{{route('addBand')}}">
+            <button type="button" class="btn btn-success">Add Band</button>
+        </a>
+        @endif
+        @if($bandsWithCounts->isEmpty())
+        <h5 style="text-align:center">No Bands yet</h5>
 
-        <table class="table table-striped">
+        @else
+
+
+        <table class="table table-striped" style="text-align: center; vertical-align: middle;">
+
+
 
             <thead>
                 <tr>
@@ -66,10 +72,12 @@
                 @endforeach
             </tbody>
         </table>
+        @endif
         <div class=""><a href="{{route('home')}}">Voltar</a></div>
 
     </div>
+</div>
 
 
 
-    @endsection
+@endsection

@@ -34,13 +34,12 @@ Route::middleware(['auth', 'user.type.one'])->group(function () {
     Route::get('/add-album/{id}', [BandController::class, 'addAlbum'])->name('addAlbum');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/add-user', [UserController::class, 'addUser'])->name('addUser');
 Route::post('/create-user', [UserController::class, 'createUser'])->name('createUser');
 Route::post('/update-user', [UserController::class, 'updateUser'])->name('updateUser');
 Route::middleware(['auth', 'can.view.user.profile'])->get('/view-user/{id}', [UserController::class, 'viewUser'])->name('viewUser');
 
-// Route::get('/view-user/{id}', [UserController::class, 'viewUser'])->name('viewUser');
+
 
 
 Route::get('/bands', [BandController::class, 'allBands'])->name('allBands');

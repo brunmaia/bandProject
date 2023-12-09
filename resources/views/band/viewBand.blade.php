@@ -9,11 +9,7 @@
 
 <div class="container">
 
-    @auth
-    @if (Auth::user()->user_type==\App\Models\User::ADMIN)
-    <a href="{{route('addAlbum',$band->id)}}">Adicionar Album</a>
-    @endif
-    @endauth
+
     <section style="text-align:center">
         <img style="width:300px" src="{{$band->photo ? asset('storage/'.$band->photo):asset('storage/images/noPhoto.png')}}">
     </section>
@@ -23,7 +19,16 @@
     </section>
 
     @auth
-    <button type="button" class="btn btn-warning" id="editButton">Edit Band</button>
+    <div class="container">
+
+        @auth
+        @if (Auth::user()->user_type==\App\Models\User::ADMIN)
+        <a href="{{route('addAlbum',$band->id)}}"><button class="btn btn-success">Add Album</button></a>
+        @endif
+        <button type="button" class="btn btn-warning" id="editButton">Edit Band</button>
+        @endauth
+
+    </div>
 
     <section id="bandEdit" style="display: none;">
 
@@ -82,7 +87,8 @@
     <h5 style="text-align:center">No albums yet</h5>
 
     @else
-    <table class="table table-striped">
+    <table class="table table-striped" style="vertical-align: middle;">
+
 
         <thead>
             <tr>

@@ -18,8 +18,7 @@
 
 <div class="container">
 
-    <table class="table table-striped">
-
+    <table class="table table-striped" style="text-align: center">
         <thead>
             <tr>
                 <th scope="col">id</th>
