@@ -22,11 +22,9 @@
 
     <div class="container">
         @if (Auth::check() &&Auth::user()->user_type==\App\Models\User::ADMIN)
-        {    
             <a href="{{route('addBand')}}">
                 <button type="button" class="btn btn-success">Add Band</button>
             </a>
-        }
         @endif
 
         @if($bandsWithCounts->isEmpty())
